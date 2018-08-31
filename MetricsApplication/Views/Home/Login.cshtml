@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script>
+        function UserValidate() 
+        document.getElementById("emailValidation").style.visibility = "hidden";
+        document.getElementById("passwordValidation").style.visibility = "hidden";
+
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var temp = 0;
+            if (email=="") {
+                document.getElementById("emailValidation").innerText = "Please provide email";
+                document.getElementById("emailValidation").style.visibility = "visible";
+                temp++;
+            }
+            if (password=="") {
+                document.getElementById("passwordValidation").innerText = "Please provide password";
+                document.getElementById("passwordValidation").style.visibility = "visible";
+                temp++;
+            }
+            if (temp > 0)
+                return false;
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container body-content">
+        <form method="post" onsubmit="return UserValidate()">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">Give your full hpe email in small letters</small>
+                <label id="emailValidation" style="visibility:hidden;color:red"></label>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                <small id="passwordHelp" class="form-text text-muted">Password is same as your email</small>
+                <label id="passwordValidation" style="visibility:hidden;color:red"></label>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+            @if (IsPost)
+            {
+                <label style="color:red">Sorry we dont find you. please give everything in small letters,If problem still persist mail to Tharun.Dintakurthi@mphasis.com</label>
+            }
+        </form>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "CATWhours";
+}
+
+<h2>CATW hours</h2>
+<script>
+    function CatwValidation() {
+        document.getElementById("hoursValidation").style.visibility = "hidden";
+        var hours = document.getElementById("hours").value;
+        if (hours == "") {
+            document.getElementById("hoursValidation").innerText = "Please provide the hours";
+            document.getElementById("hoursValidation").style.visibility = "visible";
+            return false;
+        }
+        else
+            return true;
+
+    }
+</script>
+<form method="post" onsubmit="return CatwValidation()">
+    <div class="form-group">
+        <label for="hours">Hours</label>
+        <input type="text" name="hours" id="hours" />
+        <label id="hoursValidation" style="visibility:hidden;color:red"></label>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
