@@ -7,8 +7,10 @@ namespace MetricsApplication.BussinessEntity
 {
     public class LeaveDetails
     {
-        public DateTime startDate { get; set; }
-        public DateTime endDate { get; set; }
+        public int id { get; set; }
+        public string userName { get; set; }
+        public string startDate { get; set; }
+        public string endDate { get; set; }
         public string vacationType { get; set; }
         public string comment { get; set; }
     }

@@ -29,8 +29,17 @@ namespace MetricsApplication.Common
             return connString;
         }
         #region Procedures
-        public readonly string loginValidator = "LoginValidator @userName,@password";
-
+        public readonly string loginValidator = "LoginValidator @email,@secretPassword";
+        public readonly string insertIntoMetricsData = "InsertIntoMetricsData @userName,@applicationName,@taskDescription,@taskClassification,@startDate,@endDate,@effortHours";
+        public readonly string allMetricsGetter = "AllMetricsGetter";
+        public readonly string insertIntoLeaveDetails = "InsertIntoLeaveDetails @userName,@startDate,@endDate,@vacationType,@comment";
+        public readonly string updateCATWHours = "updateCATWHours @userName,@totalHours";
+        public readonly string allMetricsGetterbyUserName = "AllMetricsGetterbyUserName @userName";
+        public readonly string metricsGetterbyId = "MetricsGetterbyId @id";
+        public readonly string metricsDeletebyId = "MetricsDeletebyId @id";
+        public readonly string allLeaveDetailsbyUserName = "AllLeaveDetailsbyUserName @userName";
+        public readonly string deleteLeaveDetailsByid = "DeleteLeaveDetailsByid @id";
+        public readonly string getCatwHoursByUserName = "GetCatwHoursByUserName @userName";
         #endregion
     }
 }

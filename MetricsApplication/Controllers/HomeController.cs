@@ -31,19 +31,21 @@ namespace MetricsApplication.Controllers
         }
         public ActionResult Login()
         {
+            Session["userName"] = null;
             return View();
         }
         [HttpPost]
         public ActionResult Login(LoginDetails loginDetails)
         {
-            string username = DataGetter.LoginValidator(loginDetails);
-            if (username!=null)
+            string userName = DataGetter.LoginValidator(loginDetails);
+            if (userName!=null)
             {
-                Session["username"] = username;
+                Session["userName"] = userName;
                 return RedirectToAction("MetricsData", "Metrics");
             }
             else
                 return View();
         }
+        
     }
 }

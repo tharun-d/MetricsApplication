@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<MetricsApplication.BussinessEntity.MetricsDataDetails>
 @{
     ViewBag.Title = "Metrics Data";
 }
@@ -25,7 +25,7 @@
             document.getElementById("applicationNameValidation").style.visibility = "visible";
             temp++;
         }
-        if (taskDescription=="") {
+        if (taskDescription == "") {
             document.getElementById("taskDescriptionValidation").innerText = "Describe the task";
             document.getElementById("taskDescriptionValidation").style.visibility = "visible";
             temp++;
@@ -50,13 +50,13 @@
             document.getElementById("endDateValidation").style.visibility = "visible";
             temp++;
         }
-        if (effortHours=="") {
+        if (effortHours == "") {
             document.getElementById("effortHoursValidation").innerText = "Please provide the hours";
             document.getElementById("effortHoursValidation").style.visibility = "visible";
             temp++;
         }
-        if (taskClassification=="APPLICATION TRAINING") {
-            if (effortHours >28.13) {
+        if (taskClassification == "APPLICATION TRAINING") {
+            if (effortHours > 28.13) {
                 document.getElementById("effortHoursValidation").innerText = "For application training it should be <=28.13";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
@@ -64,75 +64,75 @@
         }
         if (taskClassification == "BATCH JOB SHEDULEING") {
             if (effortHours > 22.7) {
-                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=22.7";
+                document.getElementById("effortHoursValidation").innerText = "For BATCH JOB SHEDULEING it should be <=22.7";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
             }
         }
         if (taskClassification == "DATABASE UPDATES") {
             if (effortHours > 22.7) {
-                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=22.7";
+                document.getElementById("effortHoursValidation").innerText = "For DATABASE UPDATES it should be <=22.7";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
             }
         }
         if (taskClassification == "DBA TASK") {
             if (effortHours > 22.7) {
-                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=22.7";
+                document.getElementById("effortHoursValidation").innerText = "For DBA TASK it should be <=22.7";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
             }
         }
         if (taskClassification == "DOCUMENTATION") {
             if (effortHours > 28.13) {
-                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=28.13";
+                document.getElementById("effortHoursValidation").innerText = "For DOCUMENTATION it should be <=28.13";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
             }
         }
         if (taskClassification == "IMPLEMENTATION TASK") {
             if (effortHours > 22.7) {
-                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=22.7";
+                document.getElementById("effortHoursValidation").innerText = "For IMPLEMENTATION TASK it should be <=22.7";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
             }
         }
         if (taskClassification == "ONCALL ABEND RESOLUTION") {
             if (effortHours > 28.13) {
-                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=28.13";
+                document.getElementById("effortHoursValidation").innerText = "For ONCALL ABEND RESOLUTION it should be <=28.13";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
             }
         }
         if (taskClassification == "REGULAR MAINTAINENCE") {
             if (effortHours > 22.7) {
-                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=22.7";
+                document.getElementById("effortHoursValidation").innerText = "For REGULAR MAINTAINENCE it should be <=22.7";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
             }
         }
         if (taskClassification == "RESEARCH WORK") {
             if (effortHours > 28.13) {
-                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=28.13";
+                document.getElementById("effortHoursValidation").innerText = "For RESEARCH WORK it should be <=28.13";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
             }
         }
         if (taskClassification == "SERVER SETUP/MAINTAINCE") {
             if (effortHours > 22.7) {
-                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=22.7";
+                document.getElementById("effortHoursValidation").innerText = "For SERVER SETUP/MAINTAINCE it should be <=22.7";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
             }
         }
         if (taskClassification == "VERIFICATION") {
             if (effortHours > 28.13) {
-                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=28.13";
+                document.getElementById("effortHoursValidation").innerText = "For VERIFICATION it should be <=28.13";
                 document.getElementById("effortHoursValidation").style.visibility = "visible";
                 temp++;
             }
         }
-        if (temp>0) {
+        if (temp > 0) {
             return false;
         }
         else {
@@ -140,6 +140,61 @@
         }
     }
 </script>
+@if (ViewBag.noData != "No Data")
+{
+    <table class="table" border="1">
+        <tr>
+            <th>
+                Application Name
+            </th>
+            <th>
+                Task Description
+            </th>
+            <th>
+                Task Classification
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Effort Hours
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.applicationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskClassification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.effortHours)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteCatw", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
 <form method="post" onsubmit="return DataValidation()">
     <div class="form-group">
         <label for="applicationName">Application Name</label>
