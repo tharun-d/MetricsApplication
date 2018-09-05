@@ -41,6 +41,10 @@ namespace MetricsApplication.Controllers
             if (userName!=null)
             {
                 Session["userName"] = userName;
+                if (userName=="Tharun")
+                {
+                    return RedirectToAction("MetricsData", "Admin");
+                }
                 return RedirectToAction("MetricsData", "Metrics");
             }
             else

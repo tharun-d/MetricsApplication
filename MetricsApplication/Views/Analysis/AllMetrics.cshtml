@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MetricsApplication.BussinessEntity.MetricsDataDetails>
+@{
+    ViewBag.Title = "AllMetrics";
+    Layout = "~/Views/Analysis/_AnalysisLayout.cshtml";
+}
+
+<h2>AllMetrics</h2>
+<form method="post">
+    @if (ViewBag.noData != "No Data")
+    {
+        <table class="table" border="1">
+            <tr>
+                <th>
+                    Application Name
+                </th>
+                <th>
+                    Task Description
+                </th>
+                <th>
+                    Task Classification
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    End Date
+                </th>
+                <th>
+                    Effort Hours
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.applicationName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.taskDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.taskClassification)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.startDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.endDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.effortHours)
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <button type="submit" class="btn btn-primary">Downlaod in Excel</button>
+    }
+    else
+    {
+        <p>No metrics filled until now</p>
+    }
+        
+</form>

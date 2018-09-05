@@ -1,0 +1,92 @@
+﻿@model IEnumerable<MetricsApplication.BussinessEntity.LeaveDetails>
+@{
+    ViewBag.Title = "LeaveDetails";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<h2>LeaveDetails</h2>
+
+<script>
+    function LeaveValidations() {
+
+        document.getElementById("startDateValidation").style.visibility = "hidden";
+        document.getElementById("endDateValidation").style.visibility = "hidden";
+        var temp = 0;
+        var startDate = document.getElementById("startDate").value;
+        var endDate = document.getElementById("endDate").value;
+
+        if (startDate == "") {
+            document.getElementById("startDateValidation").innerText = "Please select the start date";
+            document.getElementById("startDateValidation").style.visibility = "visible";
+            temp++;
+        }
+        if (endDate == "") {
+            document.getElementById("endDateValidation").innerText = "Please select the end date";
+            document.getElementById("endDateValidation").style.visibility = "visible";
+            temp++;
+        }
+        if (endDate < startDate) {
+            document.getElementById("endDateValidation").innerText = "End date cant be lesser than start date";
+            document.getElementById("endDateValidation").style.visibility = "visible";
+            temp++;
+        }
+        if (temp > 0) {
+            return false;
+        }
+        else
+            return true;
+    }
+</script>
+@if (ViewBag.noData != "No Data")
+{
+    <table class="table" border="1">
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Vacation Type</th>
+            <th>Comment</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vacationType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.comment)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteLeaveDetails", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </table>
+}
+<form method="post" onsubmit="return LeaveValidations()">
+    <div class="form-group">
+        <label for="startDate">Start date</label>
+        <input type="date" id="startDate" name="startDate" />
+        <label id="startDateValidation" style="visibility:hidden;color:red"></label>
+    </div>
+    <div class="form-group">
+        <label for="endDate">End date</label>
+        <input type="date" id="endDate" name="endDate" />
+        <label id="endDateValidation" style="visibility:hidden;color:red"></label>
+    </div>
+    <div class="form-group">
+        <label for="vacationType">Vacation type</label>
+        <input type="text" id="vacationType" name="vacationType" />
+    </div>
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <input type="text" id="comment" name="comment" />
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

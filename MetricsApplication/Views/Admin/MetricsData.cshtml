@@ -1,0 +1,268 @@
+﻿@model IEnumerable<MetricsApplication.BussinessEntity.MetricsDataDetails>
+@{
+    /**/
+
+    ViewBag.Title = "MetricsData";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<h2>MetricsData</h2>
+
+<script>
+    function DataValidation() {
+        document.getElementById("applicationNameValidation").style.visibility = "hidden";
+        document.getElementById("taskDescriptionValidation").style.visibility = "hidden";
+        document.getElementById("taskClassificationValidation").style.visibility = "hidden";
+        document.getElementById("startDateValidation").style.visibility = "hidden";
+        document.getElementById("endDateValidation").style.visibility = "hidden";
+        document.getElementById("effortHoursValidation").style.visibility = "hidden";
+        var temp = 0;
+        var applicationName = document.getElementById("applicationName").value;
+        var taskDescription = document.getElementById("taskDescription").value;
+        var taskClassification = document.getElementById("taskClassification").value;
+        var taskDescription = document.getElementById("taskDescription").value;
+        var startDate = document.getElementById("startDate").value;
+        var endDate = document.getElementById("endDate").value;
+        var effortHours = document.getElementById("effortHours").value;
+        if (applicationName == "Select") {
+            document.getElementById("applicationNameValidation").innerText = "Please select the application";
+            document.getElementById("applicationNameValidation").style.visibility = "visible";
+            temp++;
+        }
+        if (taskDescription == "") {
+            document.getElementById("taskDescriptionValidation").innerText = "Describe the task";
+            document.getElementById("taskDescriptionValidation").style.visibility = "visible";
+            temp++;
+        }
+        if (taskClassification == "Select") {
+            document.getElementById("taskClassificationValidation").innerText = "Please select the classification";
+            document.getElementById("taskClassificationValidation").style.visibility = "visible";
+            temp++;
+        }
+        if (startDate == "") {
+            document.getElementById("startDateValidation").innerText = "Please select the start date";
+            document.getElementById("startDateValidation").style.visibility = "visible";
+            temp++;
+        }
+        if (endDate == "") {
+            document.getElementById("endDateValidation").innerText = "Please select the end date";
+            document.getElementById("endDateValidation").style.visibility = "visible";
+            temp++;
+        }
+        if (endDate < startDate) {
+            document.getElementById("endDateValidation").innerText = "End date cant be lesser than start date";
+            document.getElementById("endDateValidation").style.visibility = "visible";
+            temp++;
+        }
+        if (effortHours == "") {
+            document.getElementById("effortHoursValidation").innerText = "Please provide the hours";
+            document.getElementById("effortHoursValidation").style.visibility = "visible";
+            temp++;
+        }
+        if (taskClassification == "APPLICATION TRAINING") {
+            if (effortHours > 28.13) {
+                document.getElementById("effortHoursValidation").innerText = "For application training it should be <=28.13";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (taskClassification == "BATCH JOB SHEDULEING") {
+            if (effortHours > 22.7) {
+                document.getElementById("effortHoursValidation").innerText = "For BATCH JOB SHEDULEING it should be <=22.7";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (taskClassification == "DATABASE UPDATES") {
+            if (effortHours > 22.7) {
+                document.getElementById("effortHoursValidation").innerText = "For DATABASE UPDATES it should be <=22.7";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (taskClassification == "DBA TASK") {
+            if (effortHours > 22.7) {
+                document.getElementById("effortHoursValidation").innerText = "For DBA TASK it should be <=22.7";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (taskClassification == "DOCUMENTATION") {
+            if (effortHours > 28.13) {
+                document.getElementById("effortHoursValidation").innerText = "For DOCUMENTATION it should be <=28.13";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (taskClassification == "IMPLEMENTATION TASK") {
+            if (effortHours > 22.7) {
+                document.getElementById("effortHoursValidation").innerText = "For IMPLEMENTATION TASK it should be <=22.7";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (taskClassification == "ONCALL ABEND RESOLUTION") {
+            if (effortHours > 28.13) {
+                document.getElementById("effortHoursValidation").innerText = "For ONCALL ABEND RESOLUTION it should be <=28.13";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (taskClassification == "REGULAR MAINTAINENCE") {
+            if (effortHours > 22.7) {
+                document.getElementById("effortHoursValidation").innerText = "For REGULAR MAINTAINENCE it should be <=22.7";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (taskClassification == "RESEARCH WORK") {
+            if (effortHours > 28.13) {
+                document.getElementById("effortHoursValidation").innerText = "For RESEARCH WORK it should be <=28.13";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (taskClassification == "SERVER SETUP/MAINTAINCE") {
+            if (effortHours > 22.7) {
+                document.getElementById("effortHoursValidation").innerText = "For SERVER SETUP/MAINTAINCE it should be <=22.7";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (taskClassification == "VERIFICATION") {
+            if (effortHours > 28.13) {
+                document.getElementById("effortHoursValidation").innerText = "For VERIFICATION it should be <=28.13";
+                document.getElementById("effortHoursValidation").style.visibility = "visible";
+                temp++;
+            }
+        }
+        if (temp > 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>
+@if (ViewBag.noData != "No Data")
+{
+    <table class="table" border="1">
+        <tr>
+            <th>
+                Application Name
+            </th>
+            <th>
+                Task Description
+            </th>
+            <th>
+                Task Classification
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Effort Hours
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.applicationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taskClassification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.effortHours)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteCatw", new { id = item.id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+<form method="post" onsubmit="return DataValidation()">
+    <div class="form-group">
+        <label for="applicationName">Application Name</label>
+        <select class="custom-select" name="applicationName" id="applicationName">
+            <option selected>Select</option>
+            <option value="ATRE">ATRE</option>
+            <option value="CARA">CARA</option>
+            <option value="CCM">CCM</option>
+            <option value="COSMOS NEW">COSMOS NEW</option>
+            <option value="CSL DEVOPS">CSL DEVOPS</option>
+            <option value="CSL UPGRADE">CSL UPGRADE</option>
+            <option value="DAS">DAS</option>
+            <option value="DATA GOVERNENCE">DATA GOVERNENCE</option>
+            <option value="ESEAMLESS">ESEAMLESS</option>
+            <option value="GENACCT">GENACCT</option>
+            <option value="IVR">IVR</option>
+            <option value="MILEAGE PLUS">MILEAGE PLUS</option>
+            <option value="MSPS SUPPORT">MSPS SUPPORT</option>
+            <option value="ONSITE">ONSITE</option>
+            <option value="RSA">RSA</option>
+            <option value="SPECTRE">SPECTRE</option>
+            <option value="SPECTRE NEW">SPECTRE NEW</option>
+            <option value="SQL SUPPORT">SQL SUPPORT</option>
+            <option value="WEB SPHERE">WEB SPHERE</option>
+        </select>
+        <label id="applicationNameValidation" style="visibility:hidden;color:red"></label>
+    </div>
+    <div class="form-group">
+        <label for="taskDescription">Task Description</label>
+        <textarea class="form-control" name="taskDescription" id="taskDescription" rows="4" cols="50"></textarea>
+        <label id="taskDescriptionValidation" style="visibility:hidden;color:red"></label>
+    </div>
+    <div class="form-group">
+        <label for="taskClassification">Task Classification</label>
+        <select class="custom-select" name="taskClassification" id="taskClassification">
+            <option selected>Select</option>
+            <option value="APPLICATION TRAINING">APPLICATION TRAINING</option>
+            <option value="BATCH JOB SHEDULEING">BATCH JOB SHEDULEING</option>
+            <option value="DATABASE UPDATES">DATABASE UPDATES</option>
+            <option value="DBA TASK">DBA TASK</option>
+            <option value="DOCUMENTATION">DOCUMENTATION</option>
+            <option value="IMPLEMENTATION TASK">IMPLEMENTATION TASK</option>
+            <option value="ONCALL ABEND RESOLUTION">ONCALL ABEND RESOLUTION</option>
+            <option value="REGULAR MAINTAINENCE">REGULAR MAINTAINENCE</option>
+            <option value="RESEARCH WORK">RESEARCH WORK</option>
+            <option value="SERVER SETUP/MAINTAINCE">SERVER SETUP/MAINTAINCE</option>
+            <option value="VERIFICATION">VERIFICATION</option>
+        </select>
+        <label id="taskClassificationValidation" style="visibility:hidden;color:red"></label>
+    </div>
+    <div class="form-group">
+        <label for="startDate">Start date</label>
+        <input type="date" id="startDate" name="startDate" />
+        <label id="startDateValidation" style="visibility:hidden;color:red"></label>
+    </div>
+    <div class="form-group">
+        <label for="endDate">End date</label>
+        <input type="date" id="endDate" name="endDate" />
+        <label id="endDateValidation" style="visibility:hidden;color:red"></label>
+    </div>
+    <div class="form-group">
+        <label for="effortHours">Effort hours</label>
+        <input type="text" id="effortHours" name="effortHours" />
+        <label id="effortHoursValidation" style="visibility:hidden;color:red"></label>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>

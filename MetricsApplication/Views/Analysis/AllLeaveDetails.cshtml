@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MetricsApplication.BussinessEntity.LeaveDetails>
+@{
+    ViewBag.Title = "AllLeaveDetails";
+    Layout = "~/Views/Analysis/_AnalysisLayout.cshtml";
+}
+
+<h2>AllLeaveDetails</h2>
+<form method="post">
+    @if (ViewBag.noData != "No Data")
+    {
+        <table class="table" border="1">
+            <tr>
+                <th>Application Name</th>
+                <th>Resource Name</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>No of Days</th>
+                <th>Vacation Type</th>
+                <th>Comment</th>
+              
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.applicationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.startDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.noOfDays)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vacationType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.comment)
+                </td>
+
+            </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>No leaves filled until now</p>
+    }
+        <button type="submit" class="btn btn-primary">Downlaod in Excel</button>
+</form>

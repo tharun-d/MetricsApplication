@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MetricsApplication.BussinessEntity.StatusSheet>
+
+@{
+    ViewBag.Title = "AllStatusSheet";
+    Layout = "~/Views/Analysis/_AnalysisLayout.cshtml";
+}
+
+<h2>All Status Sheet</h2>
+
+<form method="post">
+    @if (ViewBag.noData != "No Data")
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    Employee Id
+                </th>
+                <th>
+                    User Name
+                </th>
+                <th>
+                    Application Name
+                </th>
+                <th>
+                    Total Hours
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employeeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.userName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.applicationName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.totalhours)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+        <button type="submit" class="btn btn-primary">Downlaod in Excel</button>
+    }
+    else
+    {
+        <p>No status to be shown</p>
+    }
+</form>
