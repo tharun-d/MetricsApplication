@@ -45,10 +45,35 @@ namespace MetricsApplication.Controllers
                                             new DataColumn("End Date"),
                                             new DataColumn("Effort Hours"),
                                             new DataColumn("Status"),
-                                            new DataColumn("Assigned To") });
+                                            new DataColumn("Assigned To"),
+                                            new DataColumn("Secondary Index")});
+
             foreach (var item in metricsDataDetails)
             {
-                dt.Rows.Add(item.applicationName,item.taskDescription,item.taskClassification,item.startDate,item.endDate,item.effortHours,"Closed",item.userName);
+                if (item.taskClassification.ToUpper() == "APPLICATION TRAINING")
+                    item.secondaryIndex = "FUNCTIONAL SUPPORT";
+                if (item.taskClassification.ToUpper() == "BATCH JOB SHEDULEING")
+                    item.secondaryIndex = "PROCESSING SUPPORT";
+                if (item.taskClassification.ToUpper() == "DATABASE UPDATES")
+                    item.secondaryIndex = "PROCESSING SUPPORT";
+                if (item.taskClassification.ToUpper() == "DBA TASK")
+                    item.secondaryIndex = "PROCESSING SUPPORT";
+                if (item.taskClassification.ToUpper() == "DOCUMENTATION")
+                    item.secondaryIndex = "FUNCTIONAL SUPPORT";
+                if (item.taskClassification.ToUpper() == "IMPLEMENTATION TASK")
+                    item.secondaryIndex = "PROCESSING SUPPORT";
+                if (item.taskClassification.ToUpper() == "ONCALL ABEND RESOLUTION")
+                    item.secondaryIndex = "FUNCTIONAL SUPPORT";
+                if (item.taskClassification.ToUpper() == "REGULAR MAINTAINENCE")
+                    item.secondaryIndex = "PROCESSING SUPPORT";
+                if (item.taskClassification.ToUpper() == "RESEARCH WORK")
+                    item.secondaryIndex = "FUNCTIONAL SUPPORT";
+                if (item.taskClassification.ToUpper() == "SERVER SETUP/MAINTAINCE")
+                    item.secondaryIndex = "PROCESSING SUPPORT";
+                if (item.taskClassification.ToUpper() == "VERIFICATION")
+                    item.secondaryIndex = "FUNCTIONAL SUPPORT";
+
+                dt.Rows.Add(item.applicationName,item.taskDescription,item.taskClassification,item.startDate,item.endDate,item.effortHours,"Closed",item.userName,item.secondaryIndex);
             }
             using (XLWorkbook wb = new XLWorkbook())
             {

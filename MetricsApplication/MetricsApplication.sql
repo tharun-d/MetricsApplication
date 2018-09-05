@@ -166,5 +166,5 @@ select  distinct ed.username from employeestable ed
  CatwFilled 'Tharun'
 
  delete from employeestable
-  delete from leavedetails
-   delete from catwhours
+ delete from leavedetails
+ delete from catwhours

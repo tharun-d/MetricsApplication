@@ -15,5 +15,6 @@ namespace MetricsApplication.BussinessEntity
         public string endDate { get; set; }
         public double effortHours { get; set; }
         public string userName { get; set; }
+        public string secondaryIndex { get; set; }
     }
 }
